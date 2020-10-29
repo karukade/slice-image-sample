@@ -76,6 +76,11 @@ const downloadImageToLocal = (data: string, name: string, index: number) => {
   dlLink.remove()
 }
 
+const sleep = async (ms = 500) =>
+  new Promise<void>((resolve) => {
+    setTimeout(resolve, ms)
+  })
+
 export const slice = async (
   files: FileList,
   splitSize = 100
@@ -84,9 +89,13 @@ export const slice = async (
   const slicedImagesList = await Promise.all(
     sources.map((source) => sliceImage(source.data, splitSize))
   )
-  slicedImagesList.forEach((slicedImages, _i) => {
-    slicedImages?.forEach((sliceImage, i) => {
+  slicedImagesList.reduce(async (prev, slicedImages, _i) => {
+    await prev
+    return slicedImages?.reduce(async (p, sliceImage, i) => {
+      await p
       downloadImageToLocal(sliceImage.dataURI, sources[_i].name, i)
-    })
-  })
+      // ダウンロードを連続で実行できないので、sleepさせる
+      return sleep()
+    }, Promise.resolve())
+  }, Promise.resolve())
 }
