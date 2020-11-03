@@ -65,7 +65,12 @@ const sliceImage = async ({ source, splitSize, name }: SliceImageParam) => {
         saveToDataUrl: true,
       },
       (dataUrlList: ImageToSlicesResult[]) => {
-        resolve(dataUrlList.map((slicedInfo) => ({ ...slicedInfo, name })))
+        resolve(
+          dataUrlList.map((slicedInfo, i) => ({
+            ...slicedInfo,
+            name: createDownloadName(name, i),
+          }))
+        )
       }
     )
   })
@@ -81,7 +86,7 @@ export const sliceImages = (
       sliceImage({
         source: source.data,
         splitSize: splitSize,
-        name: createDownloadName(source.name, i),
+        name: source.name,
       })
     )
   )
