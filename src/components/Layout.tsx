@@ -7,9 +7,9 @@ type Props = {
 
 export default function Layout({ input, preview }: Props): h.JSX.Element {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <div style={{ width: "49%" }}>{input}</div>
-      <div style={{ width: "49%" }}>{preview}</div>
+    <div className="container mx-auto flex justify-between">
+      <div className="flex-1 m-2">{input}</div>
+      <div className="flex-1 m-2">{preview}</div>
     </div>
   )
 }

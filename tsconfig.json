@@ -3,11 +3,11 @@
     "esModuleInterop": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "lib": ["dom", "esnext"],
+    "lib": ["dom", "ES2019"],
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "target": "es5",
+    "target": "ESNext",
     "downlevelIteration": true
   },
   "include": ["src"]

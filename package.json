@@ -1,22 +1,26 @@
 {
   "name": "slice-image",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/main/index.html",
   "license": "MIT",
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
+    "@types/node": "^14.14.6",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
+    "autoprefixer": "^10.0.1",
     "eslint": "^7.12.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-prettier": "^3.1.4",
     "parcel": "^2.0.0-beta.1",
+    "postcss": "^8.1.4",
     "prettier": "^2.1.2",
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "dev": "parcel ./src/index.html"
+    "dev": "parcel ./src/index.html",
+    "build": "NODE_ENV=production parcel build ./src/index.html"
   },
   "dependencies": {
     "image-to-slices": "^0.1.3",
