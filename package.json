@@ -1,7 +1,6 @@
 {
   "name": "slice-image",
   "version": "1.0.0",
-  "main": "dist/main/index.html",
   "license": "MIT",
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.12.1",
@@ -10,20 +9,31 @@
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "autoprefixer": "^10.0.1",
+    "css-loader": "^5.0.1",
+    "css-minimizer-webpack-plugin": "^1.1.5",
     "eslint": "^7.12.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "parcel": "^2.0.0-beta.1",
+    "html-webpack-plugin": "^5.0.0-alpha.14",
+    "mini-css-extract-plugin": "^1.3.1",
     "postcss": "^8.1.4",
     "prettier": "^2.1.2",
-    "typescript": "^4.0.3"
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.0.3",
+    "webpack": "^5.5.1",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "dev": "parcel ./src/index.html",
-    "build": "NODE_ENV=production parcel build ./src/index.html"
+    "dev": "NODE_ENV=development webpack serve",
+    "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
+    "clsx": "^1.1.1",
     "image-to-slices": "^0.1.3",
+    "path-browserify": "^1.0.1",
+    "postcss-loader": "^4.0.4",
     "preact": "^10.5.5",
     "tailwindcss": "^1.9.6"
   }

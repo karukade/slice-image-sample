@@ -1,24 +1,32 @@
 import { h } from "preact"
-import { useState } from "preact/hooks"
 
 export default function Input({
   onChange,
-  initialValue,
+  value,
+  label,
 }: {
-  onChange: (val: number) => void
-  initialValue?: string | number
+  onChange: (val: string) => void
+  label?: string
+  value?: string | number
 }): h.JSX.Element {
-  const [value, setValue] = useState(initialValue || "")
   const _onChange: h.JSX.GenericEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.currentTarget
-    setValue(value)
-    if (!/^[0-9]+$/.test(value)) return
-    onChange(parseInt(value))
+    onChange(value)
   }
 
   return (
-    <div>
-      <input type="text" value={value} onChange={_onChange} />
-    </div>
+    <label className="block flex items-center">
+      {label && (
+        <span className="mr-1 text-sm text-gray-600 flex-shrink-0">
+          {label}
+        </span>
+      )}
+      <input
+        className="border rounded-md bg-gray-100 p-1 text-right w-full"
+        type="text"
+        value={value}
+        onChange={_onChange}
+      />
+    </label>
   )
 }

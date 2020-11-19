@@ -1,15 +1,21 @@
-import { h } from "preact"
+import { h, Fragment } from "preact"
+import Header from "./Header"
 
 type Props = {
-  input: h.JSX.Element | null
-  preview: h.JSX.Element | null
+  left: h.JSX.Element | null
+  right: h.JSX.Element | null
 }
 
-export default function Layout({ input, preview }: Props): h.JSX.Element {
+export default function Layout({ left, right }: Props): h.JSX.Element {
   return (
-    <div className="container mx-auto flex justify-between">
-      <div className="flex-1 m-2">{input}</div>
-      <div className="flex-1 m-2">{preview}</div>
-    </div>
+    <Fragment>
+      <Header />
+      <div className="h-full pt-7 grid grid-cols-2">
+        <div className="p-2 pt-3">
+          <div style={{ position: "sticky", top: "80px" }}>{left}</div>
+        </div>
+        <div className="bg-gray-200 p-2">{right}</div>
+      </div>
+    </Fragment>
   )
 }

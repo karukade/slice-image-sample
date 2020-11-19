@@ -1,38 +1,24 @@
 import { h } from "preact"
+import { memo } from "preact/compat"
+import clsx from "clsx"
+import { useDropHandler, UseDropHandlerParams } from "../hooks/useDropHandler"
 
-type Props = {
-  onDrop?: (fileList: FileList) => void
-  onDragOver?: (e: DragEvent) => void
-}
+type Props = UseDropHandlerParams
 
-export default function DropArea({ onDrop, onDragOver }: Props): h.JSX.Element {
-  const _onDrop = (e: DragEvent) => {
-    if (!e.dataTransfer) return
-    e.stopPropagation()
-    e.preventDefault()
-    onDrop && onDrop(e.dataTransfer.files)
-  }
-
-  const _onDragOver = (e: DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (e.dataTransfer) e.dataTransfer.dropEffect = "copy"
-    onDragOver && onDragOver(e)
-  }
+function DropArea(props: Props): h.JSX.Element {
+  const { isDragOver, onDragLeave, onDragOver, onDrop } = useDropHandler(props)
+  const className = clsx("drop-area", { "is-drag-over": isDragOver })
 
   return (
     <div
-      style={{
-        height: "300px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#cbcbcb",
-      }}
-      onDragOver={_onDragOver}
-      onDrop={_onDrop}
+      className={className}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
     >
       Drop Here
     </div>
   )
 }
+
+export default memo(DropArea)

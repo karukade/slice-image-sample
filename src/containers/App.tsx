@@ -1,10 +1,11 @@
-import { h, Fragment } from "preact"
-import { useSplitImage } from "./hooks"
+import { h } from "preact"
+import { useSplitImage } from "../hooks/useSplitImage"
 
 import Layout from "../components/Layout"
-import DropArea from "../components/DropArea"
-import Input from "../components/Input"
-import Preview from "../components/Preview"
+import Inputs from "./Inputs"
+import Preview from "./Preview"
+
+const initialValue = 100
 
 export default function App(): h.JSX.Element {
   const {
@@ -13,18 +14,19 @@ export default function App(): h.JSX.Element {
     setFileList,
     setSliceSize,
     sliceImgAndDownload,
-  } = useSplitImage(100)
+  } = useSplitImage(initialValue)
+
+  const InputsProps = {
+    splitSize,
+    setFileList,
+    setSliceSize,
+    sliceImgAndDownload,
+  }
 
   return (
     <Layout
-      input={
-        <Fragment>
-          <DropArea onDrop={setFileList} />
-          <Input onChange={setSliceSize} initialValue={splitSize} />
-          <button onClick={sliceImgAndDownload}>Slice</button>
-        </Fragment>
-      }
-      preview={imgInfo && <Preview sources={imgInfo} />}
+      left={<Inputs {...InputsProps} />}
+      right={imgInfo && <Preview sources={imgInfo} />}
     />
   )
 }

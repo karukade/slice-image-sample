@@ -1,13 +1,16 @@
+const spacing = [...Array(100).keys()].reduce((res, i) => {
+  res[i + 1] = `${8 * (i + 1)}px`
+  return res
+}, {})
+
 module.exports = {
   future: {
-    // removeDeprecatedGapUtilities: true,
-    // purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
-  purge: {
-    enable: process.env.NODE_ENV === "production",
-    content: ["./src/**/*.html"],
-  },
+  purge: ["./src/**/*.tsx"],
   theme: {
+    spacing,
     extend: {},
   },
   variants: {},
